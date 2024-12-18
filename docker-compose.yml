@@ -51,6 +51,14 @@ services:
       - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@kafka:9093
       - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
       - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true
+      - KAFKA_KRAFT_CLUSTER_ID=LPJNEpHzTtaCFDx5cCumRA # Фиксированный Cluster ID
+      - KAFKA_HEAP_OPTS=-Xmx512M -Xms512M # Ограничение памяти для Java heap
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+        reservations:
+          memory: 512M
     volumes:
       - kafka_data:/bitnami/kafka
     networks:
