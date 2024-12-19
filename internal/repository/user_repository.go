@@ -2,8 +2,8 @@ package repository
 
 import (
 	"fmt"
-	"github.com/jinzhu/gorm"
 	"github.com/joramuns/shop/internal/models"
+	"gorm.io/gorm"
 )
 
 type UserRepository struct {
