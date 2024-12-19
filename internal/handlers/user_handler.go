@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/joramuns/shop/internal/models"
 	us "github.com/joramuns/shop/internal/service"
+	"log"
 	"net/http"
 )
 
@@ -18,12 +19,14 @@ func NewUserHandler(service *us.UserService) *UserHandler {
 func (h *UserHandler) RegisterUser(c *gin.Context) {
 	var user models.User
 	if err := c.ShouldBindJSON(&user); err != nil {
+		log.Println("Handler invalid input", err)
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid input"})
 		return
 	}
 
 	createdUser, err := h.service.RegisterUser(c.Request.Context(), &user)
 	if err != nil {
+		log.Println("Handler error while registering user:", err)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to register user"})
 		return
 	}
