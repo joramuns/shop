@@ -27,3 +27,7 @@ func (s *UserService) RegisterUser(ctx context.Context, user *models.User) (*mod
 	}
 	return createdUser, nil
 }
+
+func (s *UserService) ListUsers(ctx context.Context) ([]*models.User, error) {
+	return s.repo.GetAllUsers(ctx)
+}

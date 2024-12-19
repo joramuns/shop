@@ -33,3 +33,12 @@ func (h *UserHandler) RegisterUser(c *gin.Context) {
 
 	c.JSON(http.StatusCreated, createdUser)
 }
+
+func (h *UserHandler) ListUsers(c *gin.Context) {
+	users, err := h.service.ListUsers(c)
+	if err != nil {
+		log.Println("Handler error while listing users:", err)
+	}
+
+	c.JSON(http.StatusOK, users)
+}

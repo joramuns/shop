@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"context"
 	"fmt"
 	"github.com/joramuns/shop/internal/models"
 	"gorm.io/gorm"
@@ -27,4 +28,12 @@ func (r *UserRepository) GetUserByID(id uint) (*models.User, error) {
 		return nil, fmt.Errorf("error getting user in repo: %v", err)
 	}
 	return &user, nil
+}
+
+func (r *UserRepository) GetAllUsers(ctx context.Context) ([]*models.User, error) {
+	var users []*models.User
+	if err := r.db.WithContext(ctx).Find(&users).Error; err != nil {
+		return nil, fmt.Errorf("error getting users in repo: %v", err)
+	}
+	return users, nil
 }

@@ -42,6 +42,7 @@ func main() {
 
 	router := gin.Default()
 	router.POST("/users", userHandler.RegisterUser)
+	router.GET("/list", userHandler.ListUsers)
 
 	log.Println("Server is running on :8080")
 	if err := router.Run(":8080"); err != nil {
